@@ -1,0 +1,22 @@
+{
+  "author": "wondible",
+  "build": "79317",
+  "category": ["settings", "ui"],
+  "context": "client",
+  "date": "2015/03/15",
+  "description": "Draw keyboard in settings so you can tell what is mapped and what is free.",
+  "display_name": "Keyboard Viewer",
+  "forum": null,
+  "identifier": "com.wondible.pa.keyboard_viewer",
+  "priority": 100,
+  "scenes": {
+    "settings": [
+      "coui://ui/mods/keyboard_viewer/keyboard_viewer.css",
+      "coui://ui/mods/keyboard_viewer/vkboard.js",
+      "coui://ui/mods/keyboard_viewer/keyboard_viewer.js"
+    ]
+  },
+  "signature": "not yet implemented",
+  "version": "0.1.0"
+}
+
