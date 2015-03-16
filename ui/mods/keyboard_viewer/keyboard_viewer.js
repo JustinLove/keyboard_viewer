@@ -46,6 +46,13 @@
       'alt': {},
       'shift': {},
     }
+
+    var keymap = {
+      'left': '<',
+      'right': '>',
+      'up': '/\\',
+      'down': '\\/',
+    }
     ko.computed(function() {
       model.keyboardSettingsItems().forEach(function(item) {
         var combo = item.value()
@@ -53,6 +60,8 @@
         var parts = combo.split('+')
         var key = parts.pop()
         var board = parts.sort().join('+')
+
+        key = keymap[key] || key
 
         if (board == '') board = 'normal'
         if (item.options.set == 'terrain editor') board = 'terrain:' + board
