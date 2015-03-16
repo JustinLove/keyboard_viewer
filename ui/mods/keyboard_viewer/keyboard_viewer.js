@@ -41,6 +41,7 @@
 
     var boards = {
       'normal': {},
+      'build:normal': {},
       'ctrl': {},
       'alt': {},
       'shift': {},
@@ -51,9 +52,14 @@
         if (combo == '') return
         var parts = combo.split('+')
         var key = parts.pop()
-        var board = parts.join('+')
+        var board = parts.sort().join('+')
+
         if (board == '') board = 'normal'
-        if (board == 'shift+ctrl') board = 'ctrl+shift'
+        if (item.options.set == 'terrain editor') board = 'terrain:' + board
+        if (item.options.display_sub_group == '!LOC(settings:free_movement.message):free movement') board = 'freecam:' + board
+        if (item.options.display_sub_group == '!LOC(settings:build_bar_groups.message):build bar groups') board = 'build:' + board
+        if (item.options.display_sub_group == '!LOC(settings:build_items.message):build items') board = 'build:' + board
+
         boards[board] = boards[board] || {}
         boards[board][key] = item
       })
@@ -61,7 +67,7 @@
 
     var $keyboards = $('.kbv_keyboards')
     for(var prefix in boards) {
-      var id = 'vkeyboard_' + prefix.replace('+', '_')
+      var id = 'vkeyboard_' + prefix.replace('+', '_').replace(':', '_')
       var $kb = $('<div class="sub-group-title">' + prefix + '</div><div id="' + id + '"></div>')
       $keyboards.append($kb)
       var vkb = makeKeyboard(id)
