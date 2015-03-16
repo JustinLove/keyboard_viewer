@@ -11,8 +11,8 @@
                   false,        // reserved
                   true,         // create the numpad or not?
                   "",           // font name ("" == system default)
-                  "14px",       // font size in px
-                  "#FFF",       // font color
+                  "24px",       // font size in px
+                  "#0cc",       // font color
                   "#F00",       // font color for the dead keys
                   "#0D0D0D",       // keyboard base background color
                   "#222",       // keys' background color
@@ -40,43 +40,44 @@
     ko.applyBindings(model, $section[0])
 
     var boards = {
-      'normal': [],
-      'ctrl': [],
-      'alt': [],
-      'shift': [],
+      'normal': {},
+      'ctrl': {},
+      'alt': {},
+      'shift': {},
     }
-    var setKeys = ko.computed(function() {
-      var keys = model.keyboardSettingsItems().map(function(item) {
-        return item.value()
-      })
-      keys.forEach(function(combo) {
+    ko.computed(function() {
+      model.keyboardSettingsItems().forEach(function(item) {
+        var combo = item.value()
         if (combo == '') return
         var parts = combo.split('+')
         var key = parts.pop()
         var board = parts.join('+')
         if (board == '') board = 'normal'
         if (board == 'shift+ctrl') board = 'ctrl+shift'
-        boards[board] = boards[board] || []
-        boards[board].push(key)
+        boards[board] = boards[board] || {}
+        boards[board][key] = item
       })
-      return keys
     })
-
-    console.log(boards)
 
     var $keyboards = $('.kbv_keyboards')
     for(var prefix in boards) {
       var id = 'vkeyboard_' + prefix.replace('+', '_')
       var $kb = $('<div class="sub-group-title">' + prefix + '</div><div id="' + id + '"></div>')
-      console.log($kb)
       $keyboards.append($kb)
       var vkb = makeKeyboard(id)
-      var sk = boards[prefix]
-      $(vkb.Cntr).find('div div div div').filter(function() {
-        return sk.indexOf($(this).text().toLowerCase()) != -1
-      }).css('background-color', '#088')
+      $(vkb.Cntr).find('div div div div').each(function() {
+        var $el = $(this)
+        var item = boards[prefix][$el.text().toLowerCase()]
+        if (item) {
+          $el
+            .css('background-color', '#088')
+            //.attr('data-bind', "tooltip: '"+ loc(item.title()) +"'")
+            //.attr('data-placement', "bottom")
+            //.attr('title', loc(item.title()))
+            .append('<div class="function">' + loc(item.title()) + '</div>')
+        }
+      })
+      ko.applyBindings(model, $kb[0])
     }
   })
-
-
 })()
