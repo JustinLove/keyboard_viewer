@@ -2,43 +2,14 @@
   var vkboard_callback = function(char, id) {}
   var vkboard_norm
 
-  var makeKeyboard = function(id) {
-    return new VKeyboard(id,   // container's id, mandatory
-                  vkboard_callback,// reference to callback function, mandatory
-                                // (this & following parameters are optional)
-                  true,         // create the arrow keys or not?
-                  true,         // create up and down arrow keys?
-                  false,        // reserved
-                  true,         // create the numpad or not?
-                  "",           // font name ("" == system default)
-                  "24px",       // font size in px
-                  "#0cc",       // font color
-                  "#F00",       // font color for the dead keys
-                  "#0D0D0D",       // keyboard base background color
-                  "#222",       // keys' background color
-                  "#CCC",       // background color of switched/selected item
-                  "#777",       // border color
-                  "#444",       // border/font color of "inactive" key
-                                // (key with no value/disabled)
-                  "#111",       // background color of "inactive" key
-                                // (key with no value/disabled)
-                  "#F77",       // border color of language selector's cell
-                  false,         // show key flash on click? (false by default)
-                  "#CC3300",    // font color during flash
-                  "#FF9966",    // key background color during flash
-                  "#CC3300",    // key border color during flash
-                  true,        // embed VKeyboard into the page?
-                  true,         // use 1-pixel gap between the keys?
-                  0);           // index (0-based) of the initial layout
+  var keymap = {
+    'left': '<',
+    'right': '>',
+    'up': '/\\',
+    'down': '\\/',
   }
 
-  model.settingGroups().push("keyview");
-  model.settingDefinitions().keyview = {title:"KeyView",settings:{}};
-  $.get('coui://ui/mods/keyboard_viewer/keyboard_viewer.html', function(html) {
-    var $section = $(html)
-    $(".container_settings").append($section)
-    ko.applyBindings(model, $section[0])
-
+  model.boards = ko.computed(function() {
     var boards = {
       'normal': {},
       'build:normal': {},
@@ -47,51 +18,48 @@
       'shift': {},
     }
 
-    var keymap = {
-      'left': '<',
-      'right': '>',
-      'up': '/\\',
-      'down': '\\/',
-    }
-    ko.computed(function() {
-      model.keyboardSettingsItems().forEach(function(item) {
-        var combo = item.value()
-        if (combo == '') return
-        var parts = combo.split('+')
-        var key = parts.pop()
-        var board = parts.sort().join('+')
+    model.keyboardSettingsItems().forEach(function(item) {
+      var combo = item.value()
+      if (combo == '') return
+      var parts = combo.split('+')
+      var key = parts.pop()
+      var board = parts.sort().join('+')
 
-        key = keymap[key] || key
+      key = keymap[key] || key
 
-        if (board == '') board = 'normal'
-        if (item.options.set == 'terrain editor') board = 'terrain:' + board
-        if (item.options.display_sub_group == '!LOC(settings:free_movement.message):free movement') board = 'freecam:' + board
-        if (item.options.display_sub_group == '!LOC(settings:build_items.message):build items') board = 'build:' + board
+      if (board == '') board = 'normal'
+      if (item.options.set == 'terrain editor') board = 'terrain:' + board
+      if (item.options.display_sub_group == '!LOC(settings:free_movement.message):free movement') board = 'freecam:' + board
+      if (item.options.display_sub_group == '!LOC(settings:build_items.message):build items') board = 'build:' + board
 
-        boards[board] = boards[board] || {}
-        boards[board][key] = item
-      })
+      boards[board] = boards[board] || {}
+      boards[board][key] = item
     })
 
-    var $keyboards = $('.kbv_keyboards')
-    for(var prefix in boards) {
-      var id = 'vkeyboard_' + prefix.replace('+', '_').replace(':', '_')
-      var $kb = $('<div class="sub-group-title">' + prefix + '</div><div id="' + id + '"></div>')
-      $keyboards.append($kb)
-      var vkb = makeKeyboard(id)
-      $(vkb.Cntr).find('div div div div').each(function() {
-        var $el = $(this)
-        var item = boards[prefix][$el.text().toLowerCase()]
-        if (item) {
-          $el
-            .css('background-color', '#088')
-            //.attr('data-bind', "tooltip: '"+ loc(item.title()) +"'")
-            //.attr('data-placement', "bottom")
-            //.attr('title', loc(item.title()))
-            .append('<div class="function">' + loc(item.title()) + '</div>')
-        }
-      })
-      ko.applyBindings(model, $kb[0])
-    }
+    return boards
+  })
+
+  model.keyboards = ko.computed(function() {
+    var boards = model.boards()
+    return Object.keys(boards).map(function(prefix){
+      return {
+        title: prefix,
+        rows: [Object.keys(boards[prefix]).map(function(key) {
+          return {
+            mark: key,
+            kind: 'letter',
+            fun: loc(boards[prefix][key].title())
+          }
+        })]
+      }
+    })
+  })
+
+  model.settingGroups().push("keyview");
+  model.settingDefinitions().keyview = {title:"KeyView",settings:{}};
+  $.get('coui://ui/mods/keyboard_viewer/keyboard_viewer.html', function(html) {
+    var $section = $(html)
+    $(".container_settings").append($section)
+    ko.applyBindings(model, $section[0])
   })
 })()

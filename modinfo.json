@@ -12,7 +12,6 @@
   "scenes": {
     "settings": [
       "coui://ui/mods/keyboard_viewer/keyboard_viewer.css",
-      "coui://ui/mods/keyboard_viewer/vkboard.js",
       "coui://ui/mods/keyboard_viewer/keyboard_viewer.js"
     ]
   },
