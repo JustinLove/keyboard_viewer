@@ -85,35 +85,35 @@
 .key {
   background-color: #181818;
   border-color: #444;
-  color: #0cc;
+  color: hsl(179, 100%, 45%);
 }
 
 .set {
-  background-color: #088;
+  background-color: hsl(179, 100%, 30%);
 }
 
 .build .key {
-  color: #cc0;
+  color: hsl(31, 100%, 45%);
 }
 
 .build .set {
-  background-color: #880;
+  background-color: hsl(31, 100%, 30%);
 }
 
 .freecam .key {
-  color: #44f;
+  color: hsl(220, 100%, 55%);
 }
 
 .freecam .set {
-  background-color: #228;
+  background-color: hsl(220, 100%, 30%);
 }
 
 .terrain .key {
-  color: #0c0;
+  color: hsl(120, 100%, 45%);
 }
 
 .terrain .set {
-  background-color: #080;
+  background-color: hsl(120, 100%, 30%);
 }
 
 .function {
@@ -124,6 +124,6 @@
 .ctrl .ctrl,
 .alt .alt,
 .meta .meta {
-  background-color: #808;
-  color: #e0e;
+  color: hsl(300, 30%, 45%);
+  background-color: hsl(300, 30%, 30%);
 }
