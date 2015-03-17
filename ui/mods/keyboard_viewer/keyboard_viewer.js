@@ -1,13 +1,162 @@
 (function() {
-  var vkboard_callback = function(char, id) {}
-  var vkboard_norm
-
   var keymap = {
     'left': '<',
     'right': '>',
     'up': '/\\',
     'down': '\\/',
   }
+
+  var en_us_101_qwerty = [
+    [
+      ['esc', 'letter'],
+      [null, 'letter gap'],
+      ['f1', 'letter'],
+      ['f2', 'letter'],
+      ['f3', 'letter'],
+      ['f4', 'letter'],
+      [null, 'half gap'],
+      ['f5', 'letter'],
+      ['f6', 'letter'],
+      ['f7', 'letter'],
+      ['f8', 'letter'],
+      [null, 'half gap'],
+      ['f9', 'letter'],
+      ['f10', 'letter'],
+      ['f11', 'letter'],
+      ['f12', 'letter'],
+      [null, 'half gap'],
+      ['printscr', 'letter'],
+      ['scrolllock', 'letter'],
+      ['pause', 'letter'],
+    ],
+    [
+      ['`', 'letter'],
+      ['1', 'letter'],
+      ['2', 'letter'],
+      ['3', 'letter'],
+      ['4', 'letter'],
+      ['5', 'letter'],
+      ['6', 'letter'],
+      ['7', 'letter'],
+      ['8', 'letter'],
+      ['9', 'letter'],
+      ['0', 'letter'],
+      ['-', 'letter'],
+      ['=', 'letter'],
+      ['backspace', 'two'],
+      [null, 'half gap'],
+      ['insert', 'letter'],
+      ['home', 'letter'],
+      ['pageup', 'letter'],
+      [null, 'half gap'],
+      ['numlock', 'letter'],
+      ['/', 'letter'],
+      ['*', 'letter'],
+      ['-', 'letter'],
+    ],
+    [
+      ['tab', 'onehalf'],
+      ['q', 'letter'],
+      ['w', 'letter'],
+      ['e', 'letter'],
+      ['r', 'letter'],
+      ['t', 'letter'],
+      ['y', 'letter'],
+      ['u', 'letter'],
+      ['i', 'letter'],
+      ['o', 'letter'],
+      ['p', 'letter'],
+      ['[', 'letter'],
+      [']', 'letter'],
+      ['\\', 'onehalf'],
+      [null, 'half gap'],
+      ['delete', 'letter'],
+      ['end', 'letter'],
+      ['pagedown', 'letter'],
+      [null, 'half gap'],
+      ['7', 'letter'],
+      ['8', 'letter'],
+      ['9', 'letter'],
+      ['+', 'tall'],
+    ],
+    [
+      ['capslock', 'one34'],
+      ['a', 'letter'],
+      ['s', 'letter'],
+      ['d', 'letter'],
+      ['f', 'letter'],
+      ['g', 'letter'],
+      ['h', 'letter'],
+      ['j', 'letter'],
+      ['k', 'letter'],
+      ['l', 'letter'],
+      [';', 'letter'],
+      ['\'', 'letter'],
+      ['enter', 'two14'],
+      [null, 'half gap'],
+      [null, 'letter gap'],
+      [null, 'letter gap'],
+      [null, 'letter gap'],
+      [null, 'half gap'],
+      ['4', 'letter'],
+      ['5', 'letter'],
+      ['6', 'letter'],
+    ],
+    [
+      ['shift', 'shift'],
+      ['z', 'letter'],
+      ['x', 'letter'],
+      ['c', 'letter'],
+      ['v', 'letter'],
+      ['b', 'letter'],
+      ['n', 'letter'],
+      ['m', 'letter'],
+      [',', 'letter'],
+      ['.', 'letter'],
+      ['/', 'letter'],
+      ['shift', 'shift'],
+      [null, 'half gap'],
+      [null, 'letter gap'],
+      ['up', 'letter'],
+      [null, 'letter gap'],
+      [null, 'half gap'],
+      ['1', 'letter'],
+      ['2', 'letter'],
+      ['3', 'letter'],
+      ['enter', 'tall'],
+    ],
+    [
+      ['ctrl', 'onehalf'],
+      ['os', 'fn'],
+      ['alt', 'fn'],
+      [' ', 'spacebar'],
+      ['alt', 'fn'],
+      ['os', 'fn'],
+      ['menu', 'fn'],
+      ['ctrl', 'fn'],
+      [null, 'half gap'],
+      ['left', 'letter'],
+      ['down', 'letter'],
+      ['right', 'letter'],
+      [null, 'half gap'],
+      ['0', 'two'],
+      ['.', 'letter'],
+    ],
+  ]
+
+  var expandLayout = function(grid) {
+    return grid.map(function(row) {
+      return row.map(function(key) {
+        return {
+          mark: key[0],
+          kind: key[1],
+          fun: null,
+        }
+      })
+    })
+  }
+
+  var layout = expandLayout(en_us_101_qwerty)
 
   model.boards = ko.computed(function() {
     var boards = {
@@ -44,7 +193,8 @@
     return Object.keys(boards).map(function(prefix){
       return {
         title: prefix,
-        rows: [Object.keys(boards[prefix]).map(function(key) {
+        rows: layout,
+        xrows: [Object.keys(boards[prefix]).map(function(key) {
           return {
             mark: key,
             kind: 'letter',

@@ -1,7 +1,89 @@
+/***** layout ****/
+
+.keyboard-row {
+}
+
+.key {
+  display: inline-block;
+  position: relative;
+  height: 40px;
+  width: 40px;
+  border: solid 1px;
+  text-align: center;
+  margin: 0;
+}
+
+.gap {
+  visibility: hidden;
+}
+
+.half {
+  width: 16px;
+}
+
+.two {
+  width: 80px;
+}
+
+.shift {
+  width: 100px;
+}
+
+.onehalf {
+  width: 60px;
+}
+
+.one34 {
+  width: 70px;
+}
+
+.two14 {
+  width: 90px;
+}
+
+.spacebar {
+  width: 240px;
+}
+
+.fn {
+  width: 52px;
+}
+
+.tall {
+  position: absolute;
+  height: 86px;
+}
+
+.mark {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+}
+
 .function {
-  font-size: 8px;
   position: absolute;
   bottom: 0;
+  font-size: 8px;
   line-height: 8px;
+}
+
+/****** color ******/
+
+.key {
+  background-color: #181818;
+  border-color: #444;
+}
+
+.set {
+  background-color: #088;
+}
+
+.mark {
+  color: #0cc;
+}
+
+.function {
   color: #fff;
 }
+
