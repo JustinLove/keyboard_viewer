@@ -200,12 +200,22 @@
     })
   })
 
-  model.jumpToKeybindGroup = function(group) {
+  model.scrollToKeybind = function(label) {
+    $('.one-keybind > .label_cont > label').each(function() {
+      if (this.innerHTML == label) {
+        var $parent = $(this).parents('.one-keybind-group')
+        $parent.scrollTop($(this).offset().top - $parent.offset().top)
+      }
+    })
+  }
+
+  model.jumpToKeybind = function(group, fun) {
     if (!group) return
     var index = model.keybindGroupTitles().indexOf(group)
     if (index != -1) {
       model.activeKeyboardGroupIndex(index)
       model.activeSettingsGroupIndex(6)
+      setTimeout(model.scrollToKeybind, 500, fun)
     }
   }
 
