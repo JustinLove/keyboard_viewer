@@ -1,11 +1,4 @@
 (function() {
-  var keymap = {
-    'left': '<',
-    'right': '>',
-    'up': '/\\',
-    'down': '\\/',
-  }
-
   var en_us_101_qwerty = [
     [
       ['esc', 'letter'],
@@ -45,7 +38,7 @@
       ['=', 'letter'],
       ['backspace', 'two'],
       [null, 'half gap'],
-      ['insert', 'letter'],
+      ['ins', 'letter'],
       ['home', 'letter'],
       ['pageup', 'letter'],
       [null, 'half gap'],
@@ -70,7 +63,7 @@
       [']', 'letter'],
       ['\\', 'onehalf'],
       [null, 'half gap'],
-      ['delete', 'letter'],
+      ['del', 'letter'],
       ['end', 'letter'],
       ['pagedown', 'letter'],
       [null, 'half gap'],
@@ -127,11 +120,11 @@
     ],
     [
       ['ctrl', 'onehalf'],
-      ['os', 'fn'],
+      ['meta', 'fn'],
       ['alt', 'fn'],
-      [' ', 'spacebar'],
+      ['space', 'spacebar'],
       ['alt', 'fn'],
-      ['os', 'fn'],
+      ['meta', 'fn'],
       ['menu', 'fn'],
       ['ctrl', 'fn'],
       [null, 'half gap'],
@@ -156,7 +149,7 @@
     })
   }
 
-  var layout = expandLayout(en_us_101_qwerty)
+  var layout = ko.observable(expandLayout(en_us_101_qwerty))
 
   model.boards = ko.computed(function() {
     var boards = {
@@ -173,8 +166,6 @@
       var parts = combo.split('+')
       var key = parts.pop()
       var board = parts.sort().join('+')
-
-      key = keymap[key] || key
 
       if (board == '') board = 'normal'
       if (item.options.set == 'terrain editor') board = 'terrain:' + board
@@ -193,14 +184,16 @@
     return Object.keys(boards).map(function(prefix){
       return {
         title: prefix,
-        rows: layout,
-        xrows: [Object.keys(boards[prefix]).map(function(key) {
-          return {
-            mark: key,
-            kind: 'letter',
-            fun: loc(boards[prefix][key].title())
-          }
-        })]
+        rows: layout().map(function(row) {
+          return row.map(function(key) {
+            var item = boards[prefix][key.mark]
+            return {
+              mark: key.mark,
+              kind: key.kind + (item ? ' set' : ''),
+              fun: item && loc(item.title())
+            }
+          })
+        }),
       }
     })
   })
