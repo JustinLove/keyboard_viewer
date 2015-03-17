@@ -96,7 +96,7 @@
       ['6', 'letter'],
     ],
     [
-      ['shift', 'shift'],
+      ['shift', 'twohalf shift'],
       ['z', 'letter'],
       ['x', 'letter'],
       ['c', 'letter'],
@@ -107,7 +107,7 @@
       [',', 'letter'],
       ['.', 'letter'],
       ['/', 'letter'],
-      ['shift', 'shift'],
+      ['shift', 'twohalf shift'],
       [null, 'half gap'],
       [null, 'letter gap'],
       ['up', 'letter'],
@@ -119,14 +119,14 @@
       ['enter', 'tall'],
     ],
     [
-      ['ctrl', 'onehalf'],
-      ['meta', 'fn'],
-      ['alt', 'fn'],
+      ['ctrl', 'onehalf ctrl'],
+      ['meta', 'fn meta'],
+      ['alt', 'fn alt'],
       ['space', 'spacebar'],
-      ['alt', 'fn'],
-      ['meta', 'fn'],
-      ['menu', 'fn'],
-      ['ctrl', 'fn'],
+      ['alt', 'fn alt'],
+      ['meta', 'fn meta'],
+      ['menu', 'fn menu'],
+      ['ctrl', 'fn ctrl'],
       [null, 'half gap'],
       ['left', 'letter'],
       ['down', 'letter'],
@@ -184,6 +184,7 @@
     return Object.keys(boards).map(function(prefix){
       return {
         title: prefix,
+        classes: prefix.replace(/[:+]/, ' '),
         rows: layout().map(function(row) {
           return row.map(function(key) {
             var item = boards[prefix][key.mark]

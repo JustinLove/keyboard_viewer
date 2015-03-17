@@ -1,6 +1,6 @@
 <div class="option-list keyboard_viewer" data-bind="visible:($root.settingGroups()[$root.activeSettingsGroupIndex()] === 'keyview')" style="display: none;">
   <div class="keyboards" data-bind="foreach: keyboards">
-    <div class="keyboard-group">
+    <div class="keyboard-group" data-bind="css: classes">
       <div class="sub-group-title" data-bind="text: title"></div>
       <div class="keyboard" data-bind="foreach: rows">
         <div class="keyboard-row" data-bind="foreach: $data">

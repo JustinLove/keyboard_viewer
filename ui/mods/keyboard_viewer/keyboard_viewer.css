@@ -25,7 +25,7 @@
   width: 80px;
 }
 
-.shift {
+.twohalf {
   width: 100px;
 }
 
@@ -73,17 +73,45 @@
 .key {
   background-color: #181818;
   border-color: #444;
+  color: #0cc;
 }
 
 .set {
   background-color: #088;
 }
 
-.mark {
-  color: #0cc;
+.build .key {
+  color: #cc0;
+}
+
+.build .set {
+  background-color: #880;
+}
+
+.freecam .key {
+  color: #44f;
+}
+
+.freecam .set {
+  background-color: #228;
+}
+
+.terrain .key {
+  color: #0c0;
+}
+
+.terrain .set {
+  background-color: #080;
 }
 
 .function {
   color: #fff;
 }
 
+.shift .shift,
+.ctrl .ctrl,
+.alt .alt,
+.meta .meta {
+  background-color: #808;
+  color: #e0e;
+}
