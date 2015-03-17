@@ -1,57 +1,62 @@
 /***** layout ****/
 
-.keyboard-row {
-}
-
-.key {
-  display: inline-block;
-  position: relative;
-  height: 40px;
-  width: 40px;
-  border: solid 1px;
-  text-align: center;
-  margin: 0;
-}
-
 .gap {
   visibility: hidden;
 }
 
+.keyboard {
+  word-spacing: -2px;
+  line-height: 10px;
+}
+
+.key {
+  word-spacing: normal;
+  line-height: normal;
+  display: inline-block;
+  position: relative;
+  border: solid 1px;
+  text-align: center;
+  margin: 0;
+
+  height: 36px;
+  width: 36px;
+}
+
 .half {
-  width: 16px;
+  width: 17px;
 }
 
 .two {
-  width: 80px;
+  width: 72px;
 }
 
 .twohalf {
-  width: 100px;
-}
-
-.onehalf {
-  width: 60px;
-}
-
-.one34 {
-  width: 70px;
-}
-
-.two14 {
   width: 90px;
 }
 
+.onehalf {
+  width: 54px;
+}
+
+.one34 {
+  width: 63px;
+}
+
+.two14 {
+  width: 81px;
+}
+
 .spacebar {
-  width: 240px;
+  width: 202px;
 }
 
 .fn {
-  width: 52px;
+  width: 48px;
 }
 
 .tall {
   position: absolute;
-  height: 86px;
+  height: 72px;
 }
 
 .mark {
