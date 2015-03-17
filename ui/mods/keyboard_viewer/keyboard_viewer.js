@@ -73,7 +73,7 @@
       ['+', 'tall'],
     ],
     [
-      ['caps', 'one34'],
+      ['capslock', 'one34 long'],
       ['a', 'letter'],
       ['s', 'letter'],
       ['d', 'letter'],
