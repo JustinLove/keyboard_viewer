@@ -191,13 +191,23 @@
             return {
               mark: key.mark,
               kind: key.kind + (item ? ' set' : ''),
-              fun: item && loc(item.title())
+              fun: item && loc(item.title()),
+              group: item && item.options.display_group,
             }
           })
         }),
       }
     })
   })
+
+  model.jumpToKeybindGroup = function(group) {
+    if (!group) return
+    var index = model.keybindGroupTitles().indexOf(group)
+    if (index != -1) {
+      model.activeKeyboardGroupIndex(index)
+      model.activeSettingsGroupIndex(6)
+    }
+  }
 
   model.settingGroups().push("keyview");
   model.settingDefinitions().keyview = {title:"KeyView",settings:{}};
