@@ -179,6 +179,25 @@
     return boards
   })
 
+  var scrollToBinding = function(label) {
+    $('.one-keybind > .label_cont > label').each(function() {
+      if (this.innerHTML == label) {
+        var $parent = $(this).parents('.one-keybind-group')
+        $parent.scrollTop($(this).offset().top - $parent.offset().top)
+      }
+    })
+  }
+
+  var jumpToBinding = function() {
+    if (!this.group) return
+    var index = model.keybindGroupTitles().indexOf(this.group)
+    if (index != -1) {
+      model.activeKeyboardGroupIndex(index)
+      model.activeSettingsGroupIndex(6)
+      setTimeout(scrollToBinding, 500, this.fun)
+    }
+  }
+
   model.keyboards = ko.computed(function() {
     var boards = model.boards()
     return Object.keys(boards).map(function(prefix){
@@ -193,31 +212,13 @@
               kind: key.kind + (item ? ' set' : ''),
               fun: item && loc(item.title()),
               group: item && item.options.display_group,
+              jumpToBinding: jumpToBinding,
             }
           })
         }),
       }
     })
   })
-
-  model.scrollToKeybind = function(label) {
-    $('.one-keybind > .label_cont > label').each(function() {
-      if (this.innerHTML == label) {
-        var $parent = $(this).parents('.one-keybind-group')
-        $parent.scrollTop($(this).offset().top - $parent.offset().top)
-      }
-    })
-  }
-
-  model.jumpToKeybind = function(group, fun) {
-    if (!group) return
-    var index = model.keybindGroupTitles().indexOf(group)
-    if (index != -1) {
-      model.activeKeyboardGroupIndex(index)
-      model.activeSettingsGroupIndex(6)
-      setTimeout(model.scrollToKeybind, 500, fun)
-    }
-  }
 
   model.settingGroups().push("keyview");
   model.settingDefinitions().keyview = {title:"KeyView",settings:{}};
