@@ -89,11 +89,12 @@
   top: 0;
   right: 0;
   line-height: 1;
-  font-size: 15px;
+  font-size: 12px;
   width: 15px;
   height: 15px;
-  color: red;
-  border: solid red 1px;
+  color: white;
+  background-color: red;
+  border: solid white 1px;
 
   display: none;
 }
