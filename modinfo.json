@@ -13,7 +13,7 @@
   "scenes": {
     "settings": [
       "coui://ui/mods/keyboard_viewer/keyboard_viewer.css",
-      "coui://ui/mods/keyboard_viewer/keyboard_viewer.js"
+      "coui://ui/mods/keyboard_viewer/settings.js"
     ]
   },
   "signature": "not yet implemented",

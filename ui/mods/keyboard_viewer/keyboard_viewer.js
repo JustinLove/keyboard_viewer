@@ -1,142 +1,8 @@
-(function() {
-  var en_us_101_qwerty = [
-    [
-      ['esc', 'letter'],
-      [null, 'letter gap'],
-      ['f1', 'letter'],
-      ['f2', 'letter'],
-      ['f3', 'letter'],
-      ['f4', 'letter'],
-      [null, 'half gap'],
-      ['f5', 'letter'],
-      ['f6', 'letter'],
-      ['f7', 'letter'],
-      ['f8', 'letter'],
-      [null, 'half gap'],
-      ['f9', 'letter'],
-      ['f10', 'letter'],
-      ['f11', 'letter'],
-      ['f12', 'letter'],
-      [null, 'half gap'],
-      ['printscr', 'letter long'],
-      ['scrolllock', 'letter long'],
-      ['pause', 'letter long'],
-    ],
-    [
-      ['`', 'letter'],
-      ['1', 'letter'],
-      ['2', 'letter'],
-      ['3', 'letter'],
-      ['4', 'letter'],
-      ['5', 'letter'],
-      ['6', 'letter'],
-      ['7', 'letter'],
-      ['8', 'letter'],
-      ['9', 'letter'],
-      ['0', 'letter'],
-      ['-', 'letter'],
-      ['=', 'letter'],
-      ['backspace', 'two long'],
-      [null, 'half gap'],
-      ['ins', 'letter long'],
-      ['home', 'letter long'],
-      ['pageup', 'letter long'],
-      [null, 'half gap'],
-      ['numlock', 'letter long'],
-      ['/', 'letter'],
-      ['*', 'letter'],
-      ['-', 'letter'],
-    ],
-    [
-      ['tab', 'onehalf'],
-      ['q', 'letter'],
-      ['w', 'letter'],
-      ['e', 'letter'],
-      ['r', 'letter'],
-      ['t', 'letter'],
-      ['y', 'letter'],
-      ['u', 'letter'],
-      ['i', 'letter'],
-      ['o', 'letter'],
-      ['p', 'letter'],
-      ['[', 'letter'],
-      [']', 'letter'],
-      ['\\', 'onehalf'],
-      [null, 'half gap'],
-      ['del', 'letter long'],
-      ['end', 'letter long'],
-      ['pagedown', 'letter long'],
-      [null, 'half gap'],
-      ['7', 'letter'],
-      ['8', 'letter'],
-      ['9', 'letter'],
-      ['+', 'tall'],
-    ],
-    [
-      ['capslock', 'one34 long'],
-      ['a', 'letter'],
-      ['s', 'letter'],
-      ['d', 'letter'],
-      ['f', 'letter'],
-      ['g', 'letter'],
-      ['h', 'letter'],
-      ['j', 'letter'],
-      ['k', 'letter'],
-      ['l', 'letter'],
-      [';', 'letter'],
-      ['\'', 'letter'],
-      ['enter', 'two14'],
-      [null, 'half gap'],
-      [null, 'letter gap'],
-      [null, 'letter gap'],
-      [null, 'letter gap'],
-      [null, 'half gap'],
-      ['4', 'letter'],
-      ['5', 'letter'],
-      ['6', 'letter'],
-    ],
-    [
-      ['shift', 'twohalf shift'],
-      ['z', 'letter'],
-      ['x', 'letter'],
-      ['c', 'letter'],
-      ['v', 'letter'],
-      ['b', 'letter'],
-      ['n', 'letter'],
-      ['m', 'letter'],
-      [',', 'letter'],
-      ['.', 'letter'],
-      ['/', 'letter'],
-      ['shift', 'twohalf shift'],
-      [null, 'half gap'],
-      [null, 'letter gap'],
-      ['up', 'letter long'],
-      [null, 'letter gap'],
-      [null, 'half gap'],
-      ['1', 'letter'],
-      ['2', 'letter'],
-      ['3', 'letter'],
-      ['enter', 'tall long'],
-    ],
-    [
-      ['ctrl', 'onehalf ctrl'],
-      ['meta', 'fn meta'],
-      ['alt', 'fn alt'],
-      ['space', 'spacebar'],
-      ['alt', 'fn alt'],
-      ['meta', 'fn meta'],
-      ['menu', 'fn menu'],
-      ['ctrl', 'fn ctrl'],
-      [null, 'half gap'],
-      ['left', 'letter long'],
-      ['down', 'letter long'],
-      ['right', 'letter long'],
-      [null, 'half gap'],
-      ['0', 'two'],
-      ['.', 'letter'],
-    ],
-  ]
-
+define([
+  'keyboard_viewer/ansi_104_qwerty',
+], function(
+  ansi_104_qwerty
+) {
   var expandLayout = function(grid) {
     return grid.map(function(row) {
       return row.map(function(key) {
@@ -149,7 +15,7 @@
     })
   }
 
-  var layout = ko.observable(expandLayout(en_us_101_qwerty))
+  var layout = ko.observable(expandLayout(ansi_104_qwerty))
 
   model.boards = ko.computed(function() {
     var boards = {
@@ -225,12 +91,4 @@
       }
     })
   })
-
-  model.settingGroups().push("keyview");
-  model.settingDefinitions().keyview = {title:"KeyView",settings:{}};
-  $.get('coui://ui/mods/keyboard_viewer/keyboard_viewer.html', function(html) {
-    var $section = $(html)
-    $(".container_settings").append($section)
-    ko.applyBindings(model, $section[0])
-  })
-})()
+})
