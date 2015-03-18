@@ -1,5 +1,6 @@
 define([
   'keyboard_viewer/ansi_104_qwerty',
+  'keyboard_viewer/dragdrop',
 ], function(
   ansi_104_qwerty
 ) {
@@ -19,8 +20,8 @@ define([
 
   model.boards = ko.computed(function() {
     var boards = {
-      'normal': {},
-      'build:normal': {},
+      'normal:': {},
+      'build:normal:': {},
       'ctrl': {},
       'alt': {},
       'shift': {},
@@ -33,7 +34,7 @@ define([
       var key = parts.pop()
       var board = parts.sort().join('+')
 
-      if (board == '') board = 'normal'
+      if (board == '') board = 'normal:'
       if (item.options.set == 'terrain editor') board = 'terrain:' + board
       if (item.options.display_sub_group == '!LOC(settings:free_movement.message):free movement') board = 'freecam:' + board
       if (item.options.display_sub_group == '!LOC(settings:build_items.message):build items') board = 'build:' + board
@@ -68,16 +69,30 @@ define([
     obj.item && obj.item.clear()
   }
 
+  var dropped = function(from) {
+    if (this.item) {
+      this.item.value(from.combo)
+    }
+    if (from.item) {
+      from.item.value(this.combo)
+    }
+  }
+
   model.keyboards = ko.computed(function() {
     var boards = model.boards()
-    return Object.keys(boards).map(function(prefix){
+    return Object.keys(boards).map(function(layer){
+      var prefix = layer.split(':').pop()
+      if (prefix != '') {
+        prefix = prefix + '+'
+      }
       return {
-        title: prefix,
-        classes: prefix.replace(/[:+]/, ' '),
+        title: layer,
+        classes: layer.replace(/[:+]/, ' '),
         rows: layout().map(function(row) {
           return row.map(function(key) {
-            var item = boards[prefix][key.mark]
+            var item = boards[layer][key.mark]
             return {
+              combo: prefix + key.mark,
               mark: key.mark,
               kind: key.kind + (item ? ' set' : ''),
               fun: item && loc(item.title()),
@@ -85,6 +100,7 @@ define([
               item: item,
               jumpToBinding: jumpToBinding,
               removeBinding: removeBinding,
+              dropped: dropped,
             }
           })
         }),
