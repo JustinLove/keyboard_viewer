@@ -4,10 +4,19 @@
       <div class="sub-group-title" data-bind="text: title"></div>
       <div class="keyboard" data-bind="foreach: rows">
         <div class="keyboard-row" data-bind="foreach: $data">
-          <div class="key" data-bind="css: kind, click: jumpToBinding">
+          <div class="key" data-bind="css: kind,
+            click: jumpToBinding,
+            clickBubble: false,
+            click_sound: 'default',
+            rollover_sound: 'default'">
             <div class="mark" data-bind="text: mark"></div>
             <div class="function" data-bind="text: fun"></div>
-            <div class="remove" data-bind="click: removeBinding">X</div>
+            <div class="remove" data-bind="
+              click: removeBinding,
+              clickBubble: false,
+              click_sound: 'default',
+              rollover_sound: 'default'
+              ">X</div>
           </div>
         </div>
       </div>

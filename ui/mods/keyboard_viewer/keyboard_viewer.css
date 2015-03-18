@@ -22,6 +22,10 @@
   width: 36px;
 }
 
+.key.set:hover {
+  border-color: #ddd; 
+}
+
 .half {
   width: 17px;
 }

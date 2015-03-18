@@ -200,7 +200,6 @@
 
   var removeBinding = function(obj, ev) {
     obj.item && obj.item.clear()
-    ev.stopPropagation()
   }
 
   model.keyboards = ko.computed(function() {
