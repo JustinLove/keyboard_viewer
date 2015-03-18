@@ -80,6 +80,24 @@
   line-height: 8px;
 }
 
+.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 1;
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
+  color: red;
+  border: solid red 1px;
+
+  display: none;
+}
+
+.set:hover .remove {
+  display: block;
+}
+
 /****** color ******/
 
 .key {

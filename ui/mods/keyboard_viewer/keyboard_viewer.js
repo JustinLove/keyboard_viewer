@@ -198,6 +198,11 @@
     }
   }
 
+  var removeBinding = function(obj, ev) {
+    obj.item && obj.item.clear()
+    ev.stopPropagation()
+  }
+
   model.keyboards = ko.computed(function() {
     var boards = model.boards()
     return Object.keys(boards).map(function(prefix){
@@ -212,7 +217,9 @@
               kind: key.kind + (item ? ' set' : ''),
               fun: item && loc(item.title()),
               group: item && item.options.display_group,
+              item: item,
               jumpToBinding: jumpToBinding,
+              removeBinding: removeBinding,
             }
           })
         }),
