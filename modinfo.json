@@ -6,7 +6,7 @@
   "date": "2015/03/17",
   "description": "Draw keyboards in settings so you can tell what is mapped and what is free.",
   "display_name": "Keyboard Viewer",
-  "forum": null,
+  "forum": "https://forums.uberent.com/threads/rel-keyboard-viewer.68320/",
   "icon": "http://wondible.com/pa/icons/keyboard_viewer.png",
   "identifier": "com.wondible.pa.keyboard_viewer",
   "priority": 100,
@@ -17,6 +17,6 @@
     ]
   },
   "signature": "not yet implemented",
-  "version": "0.1.0"
+  "version": "1.0.0"
 }
 
