@@ -12,6 +12,7 @@ define(function() {
     $(document).on('mousemove', dragdrop.dragmove)
     dragging = element
     $(element).addClass('dragged')
+    $('body').addClass('dragmode')
   }
 
   var moveDragging = function(x, y) {
@@ -22,6 +23,7 @@ define(function() {
     $(document).off('mouseup', dragdrop.dragcancel)
     $(document).off('mousemove', dragdrop.dragmove)
     $(dragging).removeClass('dragged').removeAttr('style')
+    $('body').removeClass('dragmode')
     dragging = null
   }
 

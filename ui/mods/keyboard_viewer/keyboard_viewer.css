@@ -26,6 +26,10 @@
   border-color: #ddd; 
 }
 
+.dragmode .key:hover {
+  border-color: #ddd; 
+}
+
 .half {
   width: 17px;
 }
@@ -86,7 +90,12 @@
 
 .function:hover,
 .function.dragged {
+  font-size: 16px;
+  line-height: 16px;
+  min-width: 80px;
+  background-color: hsla(0, 0%, 0%, 0.2);
   border: dashed white 1px;
+  z-index: 100;
 }
 
 .dragged {
