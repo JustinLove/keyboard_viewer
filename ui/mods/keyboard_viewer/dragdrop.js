@@ -6,13 +6,18 @@ define(function() {
   }
 
   var dragging
+  var dragTimer
 
   var startDragging = function(element) {
     $(document).on('mouseup', dragdrop.dragcancel)
-    $(document).on('mousemove', dragdrop.dragmove)
-    dragging = element
-    $(element).addClass('dragged')
-    $('body').addClass('dragmode')
+
+    // the dragged element has pointer-events:none, which can block regular clicks
+    dragTimer = setTimeout(function() {
+      $(document).on('mousemove', dragdrop.dragmove)
+      dragging = element
+      $(element).addClass('dragged')
+      $('body').addClass('dragmode')
+    }, 300)
   }
 
   var moveDragging = function(x, y) {
@@ -20,6 +25,8 @@ define(function() {
   }
 
   var stopDragging = function() {
+    clearTimeout(dragTimer)
+    dragTimer = null
     $(document).off('mouseup', dragdrop.dragcancel)
     $(document).off('mousemove', dragdrop.dragmove)
     $(dragging).removeClass('dragged').removeAttr('style')
