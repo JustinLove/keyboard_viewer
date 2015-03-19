@@ -18,5 +18,6 @@ require([
 
     $('.keyboard_viewer').on('mousedown', '.function', dragdrop.dragstart)
     $('.keyboard_viewer').on('mouseup', '.key', dragdrop.dragend)
+    $('.keyboard_viewer').on('mouseup', dragdrop.dragcancel)
   })
 })

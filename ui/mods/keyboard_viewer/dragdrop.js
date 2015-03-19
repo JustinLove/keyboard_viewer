@@ -11,15 +11,18 @@ define(function() {
     dragstart: function() {
       dragging = this
     },
-    dragend: function() {
+    dragend: function(ev) {
       if (dragging) {
         var from = $(dragging).data('data')
         var to = $(this).data('data')
         if (from && to && from != to) {
           to.dropped(from)
+          ev.stopPropagation()
         }
-        dragging = null
       }
+    },
+    dragcancel: function() {
+      dragging = null
     }
   }
 })
