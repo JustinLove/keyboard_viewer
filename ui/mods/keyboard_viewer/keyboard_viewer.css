@@ -90,12 +90,15 @@
 
 .function:hover,
 .function.dragged {
-  font-size: 16px;
-  line-height: 16px;
-  min-width: 80px;
   background-color: hsla(0, 0%, 0%, 0.2);
   border: dashed white 1px;
   z-index: 100;
+}
+
+.function.dragged {
+  font-size: 16px;
+  line-height: 16px;
+  max-width: 10em;
 }
 
 .dragged {
