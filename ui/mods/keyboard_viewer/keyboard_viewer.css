@@ -84,6 +84,18 @@
   line-height: 8px;
 }
 
+.function:hover,
+.function.dragged {
+  border: dashed white 1px;
+}
+
+.dragged {
+  position: fixed;
+  bottom: auto;
+  z-index: 100;
+  pointer-events: none;
+}
+
 .remove {
   position: absolute;
   top: 0;

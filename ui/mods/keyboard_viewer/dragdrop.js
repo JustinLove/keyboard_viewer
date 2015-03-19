@@ -7,9 +7,30 @@ define(function() {
 
   var dragging
 
-  return {
+  var startDragging = function(element) {
+    $(document).on('mouseup', dragdrop.dragcancel)
+    $(document).on('mousemove', dragdrop.dragmove)
+    dragging = element
+    $(element).addClass('dragged')
+  }
+
+  var moveDragging = function(x, y) {
+    $(dragging).offset({top: y - 10, left: x - 20})
+  }
+
+  var stopDragging = function() {
+    $(document).off('mouseup', dragdrop.dragcancel)
+    $(document).off('mousemove', dragdrop.dragmove)
+    $(dragging).removeClass('dragged').removeAttr('style')
+    dragging = null
+  }
+
+  var dragdrop = {
     dragstart: function() {
-      dragging = this
+      startDragging(this)
+    },
+    dragmove: function(ev) {
+      moveDragging(ev.clientX, ev.clientY)
     },
     dragend: function(ev) {
       if (dragging) {
@@ -22,7 +43,9 @@ define(function() {
       }
     },
     dragcancel: function() {
-      dragging = null
+      stopDragging()
     }
   }
+
+  return dragdrop
 })
