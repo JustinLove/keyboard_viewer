@@ -14,10 +14,17 @@ define([
 
   return {
     ready: function() {
-      $('.function-finder').autocomplete({
+      $("#function-finder-dialog").dialog({
+        modal: true,
+        autoOpen: false,
+      });
+
+      $('#function-finder').autocomplete({
         source: model.keyboardSettingPairs(),
         select: function(ev, ui) {
           console.log(this, ui.item.item)
+
+          $("#function-finder-dialog").dialog('close')
 
           // clear input
           $(this).val('')
@@ -28,6 +35,9 @@ define([
       model.keyboardSettingPairs.subscribe(function(newValue) {
         $('.function-finder').autocomplete("option", "source", newValue); 
       });
+    },
+    open: function() {
+      $("#function-finder-dialog").dialog('open')
     },
   }
 })

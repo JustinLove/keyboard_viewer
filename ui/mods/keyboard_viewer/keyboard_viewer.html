@@ -1,5 +1,4 @@
 <div class="option-list keyboard_viewer" data-bind="visible:($root.settingGroups()[$root.activeSettingsGroupIndex()] === 'keyview')" style="display: none;">
-  <input type="text" class="function-finder">
   <div class="keyboards" data-bind="foreach: keyboards">
     <div class="keyboard-group" data-bind="css: classes">
       <div class="sub-group-title" data-bind="text: title"></div>
@@ -26,5 +25,14 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div id="function-finder-dialog">
+      <div class="body_light">
+          <div class="form-group">
+            <label for="function-finder">Type to Select Function</label>
+            <input type="text" class="form-control" id="function-finder" placeholder="Enter some stuff" />
+          </div>
+      </div>
   </div>
 </div>
