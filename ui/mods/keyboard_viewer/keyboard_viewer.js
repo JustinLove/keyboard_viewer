@@ -69,6 +69,14 @@ define([
     obj.item && obj.item.clear()
   }
 
+  var contextualAction = function() {
+    if (this.item) {
+      jumpToBinding.call(this)
+    } else {
+      model.comboToAssign(this.combo)
+    }
+  }
+
   var dropped = function(from) {
     if (this.item) {
       this.item.value(from.combo)
@@ -98,7 +106,7 @@ define([
               fun: item && loc(item.title()),
               group: item && item.options.display_group,
               item: item,
-              jumpToBinding: jumpToBinding,
+              contextualAction: contextualAction,
               removeBinding: removeBinding,
               dropped: dropped,
             }

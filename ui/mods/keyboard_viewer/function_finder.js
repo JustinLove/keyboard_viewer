@@ -12,6 +12,16 @@ define([
     })
   })
 
+  model.comboToAssign = ko.observable()
+
+  model.comboToAssign.subscribe(function(combo) {
+    if (combo && combo != '') {
+      $("#function-finder-dialog").dialog('open')
+    } else {
+      $("#function-finder-dialog").dialog('close')
+    }
+  })
+
   return {
     ready: function() {
       $("#function-finder-dialog").dialog({
@@ -22,9 +32,9 @@ define([
       $('#function-finder').autocomplete({
         source: model.keyboardSettingPairs(),
         select: function(ev, ui) {
-          console.log(this, ui.item.item)
+          ui.item.item.value(model.comboToAssign())
 
-          $("#function-finder-dialog").dialog('close')
+          model.comboToAssign(null)
 
           // clear input
           $(this).val('')
