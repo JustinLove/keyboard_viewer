@@ -5,7 +5,7 @@ define([
     return model.keyboardSettingsItems().map(function(item) {
       var label = loc(item.title())
       return {
-        label: label,
+        label: label + ' (' + item.value() + ')',
         value: label,
         item: item,
       }
@@ -43,7 +43,7 @@ define([
       })
 
       model.keyboardSettingPairs.subscribe(function(newValue) {
-        $('.function-finder').autocomplete("option", "source", newValue); 
+        $('#function-finder').autocomplete("option", "source", newValue); 
       });
     },
     open: function() {
