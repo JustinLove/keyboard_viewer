@@ -4,8 +4,12 @@ define([
   model.keyboardSettingPairs = ko.computed(function() {
     return model.keyboardSettingsItems().map(function(item) {
       var label = loc(item.title())
+      var existing = item.value()
+      if (existing) {
+        existing = ' (' + item.value() + ')'
+      }
       return {
-        label: label + ' (' + item.value() + ')',
+        label: label + existing,
         value: label,
         item: item,
       }
