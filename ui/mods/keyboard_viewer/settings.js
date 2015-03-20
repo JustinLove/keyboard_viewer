@@ -9,8 +9,9 @@
 
 require([
   'keyboard_viewer/dragdrop',
+  'keyboard_viewer/function_finder',
   'keyboard_viewer/keyboard_viewer'
-], function(dragdrop) {
+], function(dragdrop, function_finder) {
   $.get('coui://ui/mods/keyboard_viewer/keyboard_viewer.html', function(html) {
     var $section = $(html)
     $(".container_settings").append($section)
@@ -18,5 +19,7 @@ require([
 
     $('.keyboard_viewer').on('mousedown', '.function', dragdrop.dragstart)
     $('.keyboard_viewer').on('mouseup', '.key', dragdrop.dragend)
+
+    function_finder.ready()
   })
 })
