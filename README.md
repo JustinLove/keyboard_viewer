@@ -4,6 +4,8 @@ Draw keyboards in settings so you can tell what is mapped and what is free.
 
 ## Superpowers
 
+Clicking on an unbound key opens a dialog with an autocomplete field to choose a function.
+
 Clicking on a bound key will jump you to that setting.
 
 On hover, a 'X' remove-binding button appears.

@@ -1,3 +1,8 @@
+## 1.2.0
+
+- Clicking on an unbound key opens a dialog with an autocomplete field to choose a function.
+- Description of possible actions on the screen.
+
 ## 1.1.0
 
 Now with superpowers

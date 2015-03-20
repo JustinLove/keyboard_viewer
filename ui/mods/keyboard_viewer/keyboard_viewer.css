@@ -1,5 +1,14 @@
 /***** layout ****/
 
+.keyboard_viewer_help {
+  width: 300px;
+  margin-left: 1em;
+}
+
+.keyboard_viewer_help strong {
+  color: #00b3ff;
+}
+
 .gap {
   visibility: hidden;
 }
@@ -22,11 +31,7 @@
   width: 36px;
 }
 
-.key.set:hover {
-  border-color: #ddd; 
-}
-
-.dragmode .key:hover {
+.key:hover {
   border-color: #ddd; 
 }
 

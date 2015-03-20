@@ -1,4 +1,6 @@
 <div class="option-list keyboard_viewer" data-bind="visible:($root.settingGroups()[$root.activeSettingsGroupIndex()] === 'keyview')" style="display: none;">
+
+
   <div class="keyboards" data-bind="foreach: keyboards">
     <div class="keyboard-group" data-bind="css: classes">
       <div class="sub-group-title" data-bind="text: title"></div>
@@ -25,6 +27,16 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="keyboard_viewer_help">
+    <p>Clicking on an <strong>unbound key</strong> opens a dialog with an autocomplete field to <strong>assign</strong> a function.</p>
+
+    <p>Clicking on a <strong>bound key</strong> will <strong>jump</strong> you to that setting.</p>
+
+    <p>On <strong>hover</strong>, a 'X' <strong>remove-binding</strong> button appears.</p>
+
+    <p>You can <strong>drag</strong> the functions from one bound key to another key.  If the target has a binding, they are <strong>swapped</strong>.</p>
   </div>
 
   <div id="function-finder-dialog">
