@@ -1,9 +1,9 @@
 {
   "author": "wondible",
-  "build": "79380",
+  "build": "86765",
   "category": ["settings", "ui"],
   "context": "client",
-  "date": "2015/03/20",
+  "date": "2015/08/29",
   "description": "Draw keyboards in settings so you can tell what is mapped and what is free, with editing superpowers.",
   "display_name": "Keyboard Viewer",
   "forum": "https://forums.uberent.com/threads/rel-keyboard-viewer.68320/",
@@ -17,6 +17,6 @@
     ]
   },
   "signature": "not yet implemented",
-  "version": "1.2.0"
+  "version": "1.2.1"
 }
 

@@ -1,4 +1,5 @@
 define([
+  'keyboard_viewer/jquery-ui-1.11.4.custom/jquery-ui.min',
 ], function(
 ) {
   model.keyboardSettingPairs = ko.computed(function() {

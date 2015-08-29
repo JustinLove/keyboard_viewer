@@ -1,3 +1,7 @@
+## 1.2.1
+
+- Embed my own jQueryUI autocomplete since Uber isn't loading it anymore
+
 ## 1.2.0
 
 - Clicking on an unbound key opens a dialog with an autocomplete field to choose a function.

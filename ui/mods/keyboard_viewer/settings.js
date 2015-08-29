@@ -5,6 +5,8 @@
 
   model.settingGroups().push("keyview");
   model.settingDefinitions().keyview = {title:"KeyView",settings:{}};
+
+  define('jquery', function() {return jQuery})
 })()
 
 require([
