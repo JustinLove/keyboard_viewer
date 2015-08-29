@@ -1,6 +1,7 @@
 ## 1.2.1
 
 - Embed my own jQueryUI autocomplete since Uber isn't loading it anymore
+- Update LOC strings for special cases sections
 
 ## 1.2.0
 
