@@ -19,7 +19,7 @@ require([
     $(".container_settings").append($section)
     ko.applyBindings(model, $section[0])
 
-    $('.keyboard_viewer').on('mousedown', '.function', dragdrop.dragstart)
+    $('.keyboard_viewer').on('mousedown', '.set .function', dragdrop.dragstart)
     $('.keyboard_viewer').on('mouseup', '.key', dragdrop.dragend)
 
     function_finder.ready()

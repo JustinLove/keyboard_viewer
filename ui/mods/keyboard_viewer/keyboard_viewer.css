@@ -93,7 +93,7 @@
   line-height: 8px;
 }
 
-.function:hover,
+.set .function:hover,
 .function.dragged {
   background-color: hsla(0, 0%, 0%, 0.2);
   border: dashed white 1px;
@@ -140,8 +140,12 @@
   color: hsl(179, 100%, 45%);
 }
 
-.set {
+.set, .ghost {
   background-color: hsl(179, 100%, 30%);
+}
+
+.ghost {
+  opacity: 0.5;
 }
 
 .build .key {

@@ -27,7 +27,9 @@ define([
       'shift': {},
     }
 
-    model.keyboardSettingsItems().forEach(function(item) {
+    var cameraControls = []
+
+    var addItem = function(item) {
       var combo = item.value()
       if (combo == '') return
       var parts = combo.split('+')
@@ -41,6 +43,35 @@ define([
 
       boards[board] = boards[board] || {}
       boards[board][key] = item
+
+      if (item.options.set == 'camera controls' && parts.length == 0) {
+        cameraControls.push(item)
+      }
+    }
+
+    model.keyboardSettingsItems().forEach(addItem)
+
+    Object.keys(boards).forEach(function(board) {
+      if (board.match('normal|build|terrain|freecam')) return
+      cameraControls.forEach(function(item) {
+        var parts = item.value().split('+')
+        var key = parts.pop()
+        var mod = Object.create(item)
+
+        if (board.match('ctrl')) {
+          if (item.title() == '!LOC:move left') {
+            mod.title = ko.observable('Rotate Counter-Clockwise')
+          }
+          if (item.title() == '!LOC:move right') {
+            mod.title = ko.observable('Rotate Clockwise')
+          }
+        }
+
+        mod.ghost = true
+        mod.value = ko.observable(board+'+'+key)
+        console.log(item.value(), item.title(), mod.value(), mod.title(), parts)
+        addItem(mod)
+      })
     })
 
     return boards
@@ -66,7 +97,7 @@ define([
   }
 
   var removeBinding = function(obj, ev) {
-    obj.item && obj.item.clear()
+    obj.item && !obj.item.ghost && obj.item.clear()
   }
 
   var contextualAction = function() {
@@ -99,10 +130,18 @@ define([
         rows: layout().map(function(row) {
           return row.map(function(key) {
             var item = boards[layer][key.mark]
+            var kind = key.kind
+            if (item) {
+              if (item.ghost) {
+                kind = kind + ' ghost'
+              } else {
+                kind = kind + ' set'
+              }
+            }
             return {
               combo: prefix + key.mark,
               mark: key.mark,
-              kind: key.kind + (item ? ' set' : ''),
+              kind: kind,
               fun: item && loc(item.title()),
               group: item && item.options.display_group,
               item: item,

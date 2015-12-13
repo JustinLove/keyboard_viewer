@@ -1,3 +1,8 @@
+## 1.3.0
+
+- Add ghost keys for special camera pan keys
+- Update modinfo tags
+
 ## 1.2.1
 
 - Embed my own jQueryUI autocomplete since Uber isn't loading it anymore
