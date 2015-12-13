@@ -1,3 +1,7 @@
+## 1.3.1
+
+- Remove leftover debugging
+
 ## 1.3.0
 
 - Add ghost keys for special camera pan keys

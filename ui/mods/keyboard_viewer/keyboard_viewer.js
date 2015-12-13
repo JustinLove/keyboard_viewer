@@ -69,7 +69,6 @@ define([
 
         mod.ghost = true
         mod.value = ko.observable(board+'+'+key)
-        console.log(item.value(), item.title(), mod.value(), mod.title(), parts)
         addItem(mod)
       })
     })
