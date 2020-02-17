@@ -1,3 +1,8 @@
+## 1.3.2
+
+- Fix help sidebar layout
+- Restore vertical scrolling of keyboards
+
 ## 1.3.1
 
 - Remove leftover debugging

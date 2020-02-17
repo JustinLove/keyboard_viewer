@@ -1,8 +1,18 @@
 /***** layout ****/
 
+.section_wrapper .container_settings .keyboard_viewer {
+  display: flex;
+  flex-direction: row;
+}
+
 .keyboard_viewer_help {
   width: 300px;
   margin-left: 1em;
+}
+
+.keyboards {
+  position: relative;
+  overflow-y: scroll;
 }
 
 .keyboard_viewer_help strong {
